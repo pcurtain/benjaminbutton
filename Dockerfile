@@ -1,4 +1,4 @@
-FROM ubuntu:14.04.5
+FROM python:3.6.0
 
 RUN apt-get update --fix-missing
 RUN apt-get -y install software-properties-common
@@ -20,4 +20,6 @@ WORKDIR /code
 # RUN rm -f /usr/bin/python3m && ln -s /usr/bin/python3.5m /usr/bin/python3m
 # RUN rm -f /usr/bin/python3m-config && ln -s /usr/bin/python3.5m-config /usr/bin/python3m-config
 
-# RUN pip3 install -r requirements/dev.txt
+RUN pip3 install -r requirements/dev.txt
+
+ENTRYPOINT ["gunicorn", "manage:app"]

@@ -2,7 +2,8 @@ version: "2"
 services:
   web:
     build: .
-    # command: ./manage.py runserver 0.0.0.0:9004
+      # command: "gunicorn manage\:app"
+      # ENTRYPOINT ["gunicorn", "manage:app"]
     volumes:
       - .:/code
     ports:
