@@ -1,5 +1,4 @@
-# Production requirements for Heorku
+# Production requirements for Heroku
 # use requirements/dev.txt for local development and testing
 -r requirements/common.txt
-Flask-SSLify==0.1.5
 gunicorn==19.7
