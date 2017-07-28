@@ -3,7 +3,7 @@ import os
 
 from flask_script import Manager, Shell
 
-from app import create_app, views
+from app import create_app
 
 COV = None
 if os.environ.get('FLASK_COVERAGE'):
@@ -21,9 +21,13 @@ if os.path.exists('.env'):
 app = create_app(os.getenv('FLASK_CONFIG') or 'default')
 manager = Manager(app)
 
+
 def make_shell_context():
     return dict(app=app)
+
+
 manager.add_command("shell", Shell(make_context=make_shell_context))
+
 
 @manager.command
 def test(coverage=False):
@@ -35,8 +39,7 @@ def test(coverage=False):
     import unittest
     import xmlrunner
     tests = unittest.TestLoader().discover('tests')
-    # run tests with unittest-xml-reporting and output to $CIRCLE_TEST_REPORTS on CircleCI or test-reports locally
-    xmlrunner.XMLTestRunner(output=os.environ.get('CIRCLE_TEST_REPORTS','test-reports')).run(tests)
+    xmlrunner.XMLTestRunner(output=os.environ.get('CIRCLE_TEST_REPORTS', 'test-reports')).run(tests) # noqa
     if COV:
         COV.stop()
         COV.save()

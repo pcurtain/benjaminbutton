@@ -1,6 +1,5 @@
-from flask import Flask, Blueprint, render_template, abort
+from flask import Flask
 from flask_bootstrap import Bootstrap
-from jinja2 import TemplateNotFound
 from config import config
 from . import views
 
