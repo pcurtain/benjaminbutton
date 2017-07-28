@@ -1,0 +1,18 @@
+version: "2"
+services:
+  web:
+    build: .
+    # command: ./manage.py runserver 0.0.0.0:9004
+    volumes:
+      - .:/code
+    ports:
+      - "9004:9004"
+    env_file:
+      - .env.default
+      - .env
+#     depends_on:
+#       - db
+#   db:
+#     build: docker/postgres
+#     environment:
+#       - POSTGRES_PASSWORD=postgres

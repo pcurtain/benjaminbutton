@@ -1,0 +1,38 @@
+{% extends "bootstrap/base.html" %}
+
+{% block title %}Button for CircleCI{% endblock %}
+
+{% block head %}
+{{ super() }}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    {% for message in get_flashed_messages() %}
+    <div class="alert alert-warning">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        {{ message }}
+    </div>
+    {% endfor %}
+
+    {% block page_content %}{% endblock %}
+</div>
+
+    {% block footer %}
+    <div>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>Patrick Curtain</p>
+    <ul>
+      <li><a href="mailto:pcurtain@gmail.com">pcurtain@gmail.com</a></li>
+      <li><a href="http://pcurtain.com/">pcurtain.com</a></li>
+      <li><a href="http://linkedin.com/in/pcurtain/">linkedin</a></li>
+    </ul>
+    </div>
+    {% endblock %}
+{% endblock %}
+
+
+{% block scripts %}
+{{ super() }}
+{% endblock %}
