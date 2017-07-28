@@ -1,0 +1,34 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/benj
+    docker:
+      - image: python:3.6.0
+        environment:
+          FLASK_CONFIG: testing
+    steps:
+      - checkout
+      - run: pip install -r requirements/dev.txt
+
+    steps:
+      - restore_cache:
+          key: deps1-{{ .Branch }}-{{ checksum "requirements/dev.txt" }}
+      - run:
+          name: Install Python deps in a venv
+          command: |
+            python3 -m venv benj
+            . benj/bin/activate
+            pip install -r requirements/dev.txt
+      - save_cache:
+          key: deps1-{{ .Branch }}-{{ checksum "requirements/dev.txt" }}
+          paths:
+            - "benj"
+      - run:
+          command: |
+            . benj/bin/activate
+            python manage.py test
+      - store_artifacts:
+          path: test-reports/
+          destination: tr1
+      - store_test_results:
+          path: test-reports/
