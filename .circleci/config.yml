@@ -8,9 +8,6 @@ jobs:
           FLASK_CONFIG: testing
     steps:
       - checkout
-      - run: pip install -r requirements/dev.txt
-
-    steps:
       - restore_cache:
           key: deps1-{{ .Branch }}-{{ checksum "requirements/dev.txt" }}
       - run:
