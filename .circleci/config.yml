@@ -1,7 +1,7 @@
 version: 2
 jobs:
   build:
-    working_directory: ~/benj
+    working_directory: ~/benjaminbutton
     docker:
       - image: python:3.6.0
         environment:
@@ -16,16 +16,16 @@ jobs:
       - run:
           name: Install Python deps in a venv
           command: |
-            python3 -m venv benj
-            . benj/bin/activate
+            python3 -m venv venv
+            . venv/bin/activate
             pip install -r requirements/dev.txt
       - save_cache:
           key: deps1-{{ .Branch }}-{{ checksum "requirements/dev.txt" }}
           paths:
-            - "benj"
+            - "venv"
       - run:
           command: |
-            . benj/bin/activate
+            . venv/bin/activate
             python manage.py test
       - store_artifacts:
           path: test-reports/
