@@ -51,6 +51,11 @@ def test(coverage=False):
         print('HTML version: file://%s/index.html' % covdir)
         COV.erase()
 
+@manager.command
+def pytest():
+    import pytest
+    outcome = pytest.main(['-v', '-s', '-x', 'tests'])
+    return outcome
 
 @manager.command
 def profile(length=25, profile_dir=None):
